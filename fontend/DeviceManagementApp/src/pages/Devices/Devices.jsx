@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { devicesData } from '../../data/deviceData'
 import DevicesTable from '../../components/DeviceTable'
+import AddDeviceForm from '../../components/AddDeviceForm';
 
 export default function Devices() {
     const [devices, setDevices] = useState(devicesData);
@@ -22,13 +23,38 @@ export default function Devices() {
                 .includes(search.toLowerCase())
         );
 
+    const addDevice = (newDevice) => {
 
+        const device = {
+            id: Date.now(),
+            ...newDevice
+        };
+
+        setDevices([
+            ...devices,
+            device
+        ]);
+
+        console.log("nhân viên vừa được thêm vào:", device);
+    };
+
+    useEffect(() => {
+
+        console.log(
+            "Danh sách thiết bị thay đổi"
+        );
+
+    }, [devices]);
 
     return (
         <>
             <h2 className="mb-4">
                 Devices Management
             </h2>
+
+            <AddDeviceForm 
+                onAdd={addDevice}
+            />
             
             <div className="mb-3">
                 <input 
@@ -46,6 +72,7 @@ export default function Devices() {
                 devices={filteredDevices}
                 onDelete={deleteDevice}
             />
+
         </>
     )
 }

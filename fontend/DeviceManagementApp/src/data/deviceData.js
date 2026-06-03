@@ -1,5 +1,3 @@
-import Departments from "../pages/Departments/Departments";
-
 export const devicesData = [
     {
         id: 1,

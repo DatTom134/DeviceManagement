@@ -1,0 +1,17 @@
+.sidebar-item:hover { 
+    background-color: rgba(0, 123, 255, 0.1);
+    border-radius: 8px;
+}
+
+.sidebar-item .nav-link {
+    display: flex;
+    justify-content: start;
+    overflow: hidden;
+    transition: all 0.3s;
+}
+
+.sidebar-item .nav-link:hover {
+    font-size: 20px;
+    padding: 12px 16px;
+    border-radius: 8px;
+}

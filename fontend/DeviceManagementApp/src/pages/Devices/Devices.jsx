@@ -2,11 +2,14 @@ import { useState, useEffect } from 'react'
 import { devicesData } from '../../data/deviceData'
 import DevicesTable from '../../components/DeviceTable'
 import AddDeviceForm from '../../components/AddDeviceForm';
+import EditDevicemodal from '../../components/EditDeviceModal';
 
 export default function Devices() {
     const [devices, setDevices] = useState(devicesData);
 
     const [search, setSearch] = useState("");
+
+    const [selectedDevice, setSelectedDevice] = useState(null);
 
     const deleteDevice = (id) => {
         const updated = 
@@ -38,12 +41,24 @@ export default function Devices() {
         console.log("nhân viên vừa được thêm vào:", device);
     };
 
+    const editDevice = (device) => {
+        setSelectedDevice(device);
+    };
+
+    const updateDevice = (updatedDevice) => {
+
+        const updatedList = 
+            devices.map(device => 
+                device.id === updatedDevice.id
+                    ? updatedDevice
+                    : device
+            );
+
+        setDevices(updatedList);
+    };
+
     useEffect(() => {
-
-        console.log(
-            "Danh sách thiết bị thay đổi"
-        );
-
+        
     }, [devices]);
 
     return (
@@ -71,8 +86,13 @@ export default function Devices() {
             <DevicesTable
                 devices={filteredDevices}
                 onDelete={deleteDevice}
+                onEdit={editDevice}
             />
 
+            <EditDevicemodal 
+                selectedDevice={selectedDevice}
+                onUpdate={updateDevice}
+            />
         </>
     )
 }

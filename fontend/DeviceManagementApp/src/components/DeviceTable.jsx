@@ -1,6 +1,7 @@
 export default function DevicesTable({
     devices,
-    onDelete
+    onDelete,
+    onEdit
 }) {
     return (
         <table className="table table-bordered">
@@ -37,6 +38,15 @@ export default function DevicesTable({
                             </td>
 
                             <td>
+                                <button 
+                                    className="btn btn-warning btn-sm me-2"
+                                    onClick={() => onEdit(device)}
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#editModal"
+                                >
+                                    Edit
+                                </button>
+
                                 <button
                                     className="btn btn-danger btn-sm"
                                     onClick={() => onDelete(device.id)}
